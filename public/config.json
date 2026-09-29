@@ -1,0 +1,155 @@
+{
+  "_istruzioni": "Tutti i dati del sito. Per cambiare brand modifica solo questo file. I valori 'DA INSERIRE' compaiono sul sito come segnaposto evidenti. Le foto delle auto: public/images/auto/<cartella>/, poi lancia 'npm run images'.",
+
+  "brand": {
+    "nome": "CMGarage Carsboutique",
+    "nomeBreve": "CMGarage",
+    "logo": "/images/logo/cmgarage-logo-dark.svg",
+    "favicon": "/images/logo/favicon-32.png",
+    "appleTouchIcon": "/images/logo/apple-touch-icon.png",
+    "colori": {
+      "sfondo": "#0A0A0B",
+      "accento": "#C9923D"
+    }
+  },
+
+  "immagini": {
+    "_nota": "Percorsi senza '-<larghezza>.webp': il sito aggiunge da solo le misure generate da 'npm run images'.",
+    "hero": { "src": "/images/opt/showroom/showroom-hero", "larghezze": [640, 1080], "alt": "Lo showroom CMGarage: un capannone ad archi con le auto esposte" },
+    "boutique": { "src": "/images/opt/auto/ferrari-f430/ferrari-f430-01", "larghezze": [480, 800, 1080], "alt": "Ferrari F430 nello showroom CMGarage" },
+    "servizi": { "src": "/images/opt/auto/lamborghini-gallardo-spyder/lamborghini-gallardo-spyder-01", "larghezze": [480, 800, 1080], "alt": "Lamborghini Gallardo Spyder verde nello showroom" }
+  },
+
+  "contatti": {
+    "whatsapp": "393341701038",
+    "whatsappVisibile": "+39 334 170 1038",
+    "instagram": "cmcarsboutique",
+    "instagramUrl": "https://www.instagram.com/cmcarsboutique",
+    "indirizzo": "DA INSERIRE",
+    "citta": "Vizzolo Predabissi (MI)",
+    "mappaQuery": "Vizzolo Predabissi, Milano",
+    "orari": "Visite solo su appuntamento"
+  },
+
+  "testi": {
+    "titoloPagina": "CMGarage Carsboutique | Auto sportive e da collezione",
+    "descrizionePagina": "Auto sportive e da collezione selezionate a Vizzolo Predabissi (MI). Visite su appuntamento.",
+    "heroTitolo": ["Non", "semplicemente", "uno showroom."],
+    "_heroTitolo": "Una voce per riga. L'ultima parola dell'ultima riga è in corsivo oro.",
+    "heroSottotitolo": "Auto sportive e da collezione, selezionate una per una. Vizzolo Predabissi, su appuntamento.",
+    "collezioneTitolo": "La collezione",
+    "collezioneTesto": "Poche auto, scelte con cura. Ognuna ha una storia da raccontare di persona.",
+    "venduteTitolo": "Vendute di recente",
+    "boutiqueTitolo": "La Boutique",
+    "boutiqueTesto": "Un capannone ad archi alle porte di Milano, pensato per guardare un'auto con calma, senza fretta e senza folla. Si entra su appuntamento, una visita alla volta.",
+    "boutiquePunti": [
+      { "titolo": "Auto selezionate", "testo": "Non un piazzale: una collezione piccola, dove ogni auto è scelta una per una." },
+      { "titolo": "Storiche e da collezione", "testo": "Accanto alle sportive moderne, classiche e youngtimer iscritte ASI." },
+      { "titolo": "Ricerca su misura", "testo": "Se l'auto che cerca non è in showroom, la cerchiamo noi per Lei." }
+    ],
+    "serviziTitolo": "Servizi",
+    "servizi": [
+      { "id": "vendita", "titolo": "Vendita", "testo": "Auto sportive, di lusso e da collezione, presentate con ogni dettaglio e visibili su appuntamento." },
+      { "id": "permuta", "titolo": "Permuta", "testo": "Valutiamo la Sua auto attuale come parte del pagamento." },
+      { "id": "finanziamento", "titolo": "Finanziamento", "testo": "Soluzioni di pagamento da definire insieme, caso per caso." },
+      { "id": "ricerca", "titolo": "Ricerca su richiesta", "testo": "Ci dica marca, modello e allestimento: troviamo l'auto per Lei." }
+    ],
+    "permutaTitolo": "Valuta la tua permuta",
+    "permutaTesto": "Compili i dati della Sua auto: il messaggio si apre già scritto su WhatsApp, pronto da inviare.",
+    "contattiTitolo": "Venga a trovarci",
+    "footerCredito": "Anteprima realizzata da La Bottega del Web"
+  },
+
+  "auto": [
+    {
+      "slug": "ferrari-f430",
+      "marca": "Ferrari",
+      "nome": "Ferrari F430 Coupé F1",
+      "note": "Iscritta ASI",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "cavalli": "DA INSERIRE",
+      "cambio": "DA INSERIRE",
+      "colore": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "cartella": "auto/ferrari-f430",
+      "foto": ["ferrari-f430-01.jpg", "ferrari-f430-02.jpg", "ferrari-f430-03.jpg", "ferrari-f430-04.jpg", "ferrari-f430-05.jpg", "ferrari-f430-06.jpg"]
+    },
+    {
+      "slug": "lamborghini-gallardo-spyder",
+      "marca": "Lamborghini",
+      "nome": "Lamborghini Gallardo Spyder LP520 V10",
+      "note": "Verde",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "cavalli": "DA INSERIRE",
+      "cambio": "DA INSERIRE",
+      "colore": "Verde",
+      "prezzo": "Su richiesta",
+      "cartella": "auto/lamborghini-gallardo-spyder",
+      "foto": ["lamborghini-gallardo-spyder-01.jpg", "lamborghini-gallardo-spyder-02.jpg", "lamborghini-gallardo-spyder-03.jpg", "lamborghini-gallardo-spyder-04.jpg", "lamborghini-gallardo-spyder-05.jpg", "lamborghini-gallardo-spyder-06.jpg"]
+    },
+    {
+      "slug": "bmw-840d",
+      "marca": "BMW",
+      "nome": "BMW 840d Coupé xDrive M Sport",
+      "note": "Individual Composition",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "cavalli": "DA INSERIRE",
+      "cambio": "DA INSERIRE",
+      "colore": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "cartella": "auto/bmw-840d",
+      "foto": ["bmw-840d-01.jpg", "bmw-840d-02.jpg", "bmw-840d-03.jpg", "bmw-840d-04.jpg", "bmw-840d-05.jpg"]
+    },
+    {
+      "slug": "ford-escort-rs-cosworth",
+      "marca": "Ford",
+      "nome": "Ford Escort RS Cosworth",
+      "note": "Iscritta ASI, targa originale",
+      "stato": "Disponibile",
+      "anno": "1995",
+      "km": "DA INSERIRE",
+      "cavalli": "DA INSERIRE",
+      "cambio": "DA INSERIRE",
+      "colore": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "cartella": "auto/ford-escort-rs-cosworth",
+      "foto": ["ford-escort-rs-cosworth-01.jpg", "ford-escort-rs-cosworth-02.jpg", "ford-escort-rs-cosworth-03.jpg", "ford-escort-rs-cosworth-04.jpg", "ford-escort-rs-cosworth-05.jpg"]
+    },
+    {
+      "slug": "audi-r8-spyder",
+      "marca": "Audi",
+      "nome": "Audi R8 Spyder 5.2 V10",
+      "note": "525 CV",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "cavalli": "525 CV",
+      "cambio": "DA INSERIRE",
+      "colore": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "cartella": "auto/audi-r8-spyder",
+      "foto": ["audi-r8-spyder-01.jpg", "audi-r8-spyder-02.jpg", "audi-r8-spyder-03.jpg", "audi-r8-spyder-04.jpg", "audi-r8-spyder-05.jpg"]
+    },
+    {
+      "slug": "porsche-911-carrera-4",
+      "marca": "Porsche",
+      "nome": "Porsche 911 Carrera 4 (991 mk1) Coupé 3.4",
+      "note": "",
+      "stato": "Venduta",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "cavalli": "DA INSERIRE",
+      "cambio": "DA INSERIRE",
+      "colore": "DA INSERIRE",
+      "prezzo": "-",
+      "cartella": "auto/porsche-911-carrera-4",
+      "foto": ["porsche-911-carrera-4-01.jpg"]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "concessionaria": "CMGarage Carsboutique",
+  "instagram": "@cmcarsboutique",
+  "citta": "Vizzolo Predabissi (MI)",
+  "auto": [
+    {
+      "cartella": "auto/ferrari-f430",
+      "nome": "Ferrari F430 Coupé F1",
+      "note": "Iscritta ASI",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "copertina": "ferrari-f430-01.jpg"
+    },
+    {
+      "cartella": "auto/lamborghini-gallardo-spyder",
+      "nome": "Lamborghini Gallardo Spyder LP520 V10",
+      "note": "Verde",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "copertina": "lamborghini-gallardo-spyder-01.jpg"
+    },
+    {
+      "cartella": "auto/bmw-840d",
+      "nome": "BMW 840d Coupé xDrive M Sport",
+      "note": "Individual Composition",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "copertina": "bmw-840d-01.jpg"
+    },
+    {
+      "cartella": "auto/ford-escort-rs-cosworth",
+      "nome": "Ford Escort RS Cosworth",
+      "note": "1995, iscritta ASI, targa originale",
+      "stato": "Disponibile",
+      "anno": "1995",
+      "km": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "copertina": "ford-escort-rs-cosworth-01.jpg"
+    },
+    {
+      "cartella": "auto/audi-r8-spyder",
+      "nome": "Audi R8 Spyder 5.2 V10",
+      "note": "525 CV",
+      "stato": "Disponibile",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "prezzo": "Su richiesta",
+      "copertina": "audi-r8-spyder-01.jpg"
+    },
+    {
+      "cartella": "auto/porsche-911-carrera-4",
+      "nome": "Porsche 911 Carrera 4 (991 mk1) Coupé 3.4",
+      "note": "Solo 1 foto",
+      "stato": "Venduta",
+      "anno": "DA INSERIRE",
+      "km": "DA INSERIRE",
+      "prezzo": "-",
+      "copertina": "porsche-911-carrera-4-01.jpg"
+    }
+  ]
+}
