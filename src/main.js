@@ -5,11 +5,11 @@ import '@fontsource-variable/geist/index.css';
 import './styles.css';
 
 import { shell, home, detail, notFound, waLink } from './templates.js';
+import { runMotion, settle } from './motion.js';
 
 const app = document.getElementById('app');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let cfg;
-let revealObserver;
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
@@ -68,7 +68,6 @@ function render({ restore = false, first = false } = {}) {
   }
   fab.hidden = r.name === 'detail';
   setupFab(fab);
-  setupReveals();
 
   const saved = history.state?.scroll;
   if (location.hash) {
@@ -85,6 +84,8 @@ function render({ restore = false, first = false } = {}) {
     heading?.setAttribute('tabindex', '-1');
     heading?.focus({ preventScroll: true });
   }
+
+  runMotion({ page: document.body.dataset.page, first });
 }
 
 function saveScroll() {
@@ -203,28 +204,6 @@ function setupFab(fab) {
   fabObserver.observe(ctas);
 }
 
-/* ---------- Comparsa delle sezioni ---------- */
-
-function setupReveals() {
-  revealObserver?.disconnect();
-  const items = document.querySelectorAll('[data-reveal]');
-  if (!('IntersectionObserver' in window)) {
-    items.forEach((el) => el.classList.add('is-in'));
-    return;
-  }
-  revealObserver = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add('is-in');
-        revealObserver.unobserve(entry.target);
-      }
-    },
-    { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
-  );
-  items.forEach((el) => revealObserver.observe(el));
-}
-
 /* ---------- Filtro collezione ---------- */
 
 function setupFilters() {
@@ -246,7 +225,7 @@ function setupFilters() {
         const match = brand === '*' || card.dataset.marca === brand;
         card.hidden = !match;
         if (match) {
-          card.classList.add('is-in');
+          settle(card);
           shown++;
         }
       });

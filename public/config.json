@@ -15,7 +15,7 @@
 
   "immagini": {
     "_nota": "Percorsi senza '-<larghezza>.webp': il sito aggiunge da solo le misure generate da 'npm run images'.",
-    "hero": { "src": "/images/opt/showroom/showroom-hero", "larghezze": [640, 1080], "alt": "Lo showroom CMGarage: un capannone ad archi con le auto esposte" },
+    "hero": { "src": "/images/opt/showroom/showroom-panoramica", "larghezze": [640, 1080], "alt": "Lo showroom CMGarage: un capannone ad archi con le auto esposte" },
     "boutique": { "src": "/images/opt/auto/ferrari-f430/ferrari-f430-01", "larghezze": [480, 800, 1080], "alt": "Ferrari F430 nello showroom CMGarage" },
     "servizi": { "src": "/images/opt/auto/lamborghini-gallardo-spyder/lamborghini-gallardo-spyder-01", "larghezze": [480, 800, 1080], "alt": "Lamborghini Gallardo Spyder verde nello showroom" }
   },
@@ -56,6 +56,8 @@
     ],
     "permutaTitolo": "Valuta la tua permuta",
     "permutaTesto": "Compili i dati della Sua auto: il messaggio si apre già scritto su WhatsApp, pronto da inviare.",
+    "manifesto": ["Una visita", "alla volta.", "Solo su appuntamento."],
+    "_manifesto": "Frase grande che si illumina parola per parola scorrendo. Tra la prima e la seconda riga compare una piccola foto.",
     "contattiTitolo": "Venga a trovarci",
     "footerCredito": "Anteprima realizzata da La Bottega del Web"
   },

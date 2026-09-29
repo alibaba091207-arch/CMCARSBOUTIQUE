@@ -61,6 +61,7 @@ const NAV = [
 export function shell(cfg) {
   const { brand, contatti, testi } = cfg;
   return `
+  <div class="progress" aria-hidden="true"></div>
   <header class="nav" data-nav>
     <div class="nav__pill">
       <a class="nav__logo" href="/" aria-label="${esc(brand.nome)}, home">
@@ -90,6 +91,9 @@ export function shell(cfg) {
   <main id="contenuto" tabindex="-1"></main>
 
   <footer class="footer">
+    <div class="container">
+      <p class="footer__word display" data-split aria-hidden="true">${esc(brand.nomeBreve)}</p>
+    </div>
     <div class="container footer__inner">
       <img class="footer__logo" src="${brand.logo}" alt="${esc(brand.nome)}" width="120" height="104" loading="lazy" />
       <div class="footer__text">
@@ -141,12 +145,43 @@ function hero(cfg) {
   </section>`;
 }
 
+/** Nastro con le marche trattate: l'unico elemento in movimento continuo della pagina. */
+function marquee(cfg) {
+  const brands = [...new Set(cfg.auto.map((a) => a.marca))];
+  const row = brands.map((b) => `<span class="marquee__item">${esc(b)}</span>`).join('');
+  return `
+  <div class="marquee" aria-label="Marche in collezione: ${esc(brands.join(', '))}">
+    <div class="marquee__track" aria-hidden="true">
+      <div class="marquee__group">${row}</div>
+      <div class="marquee__group">${row}</div>
+    </div>
+  </div>`;
+}
+
+function manifesto(cfg) {
+  const lines = cfg.testi.manifesto;
+  if (!lines?.length) return '';
+  const img = cfg.immagini.boutique;
+  return `
+  <section class="section manifesto" aria-label="${esc(lines.join(' '))}">
+    <div class="container">
+      <p class="manifesto__text display" data-scrub aria-hidden="true">
+        <span class="manifesto__line">${esc(lines[0])}<span class="manifesto__pill" data-pill><img src="${img.src}-480.webp" alt="" loading="lazy" decoding="async" /></span></span>
+        ${lines
+          .slice(1)
+          .map((l, i) => `<span class="manifesto__line ${i === lines.length - 2 ? 'manifesto__line--gold' : ''}">${esc(l)}</span>`)
+          .join('')}
+      </p>
+    </div>
+  </section>`;
+}
+
 function carCard(car, i) {
   return `
   <li class="car" data-marca="${esc(car.marca)}" data-reveal style="--i:${i % 2}">
     <a class="car__link" href="/auto/${esc(car.slug)}">
       <div class="bezel">
-        <div class="bezel__core car__media">
+        <div class="bezel__core car__media" data-img-reveal>
           ${carImg(car, car.foto[0], {
             sizes: '(min-width: 1024px) 42vw, (min-width: 700px) 46vw, 92vw',
             alt: car.nome,
@@ -171,9 +206,9 @@ function collection(cfg) {
   return `
   <section class="section collection" id="collezione" aria-labelledby="collezione-title">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <h2 class="display h2" id="collezione-title">${esc(cfg.testi.collezioneTitolo)}</h2>
-        <p class="lead">${esc(cfg.testi.collezioneTesto)}</p>
+      <div class="section-head">
+        <h2 class="display h2" id="collezione-title" data-split>${esc(cfg.testi.collezioneTitolo)}</h2>
+        <p class="lead" data-lines>${esc(cfg.testi.collezioneTesto)}</p>
       </div>
       <div class="filters" role="group" aria-label="Filtra per marca" data-filters data-reveal>
         <button type="button" class="chip" aria-pressed="true" data-filter="*">Tutte <span class="chip__count">${cars.length}</span></button>
@@ -198,7 +233,7 @@ function soldSection(cfg) {
   return `
   <section class="section sold" id="vendute" aria-labelledby="vendute-title">
     <div class="container">
-      <h2 class="display h3" id="vendute-title" data-reveal>${esc(cfg.testi.venduteTitolo)}</h2>
+      <h2 class="display h3" id="vendute-title" data-split>${esc(cfg.testi.venduteTitolo)}</h2>
       <ul class="sold__list">
         ${cars
           .map(
@@ -228,8 +263,8 @@ function boutique(cfg) {
   <section class="section boutique" id="boutique" aria-labelledby="boutique-title">
     <div class="container boutique__grid">
       <div class="boutique__text">
-        <h2 class="display h2" id="boutique-title" data-reveal>${esc(testi.boutiqueTitolo)}</h2>
-        <p class="boutique__statement" data-reveal>${esc(testi.boutiqueTesto)}</p>
+        <h2 class="display h2" id="boutique-title" data-split>${esc(testi.boutiqueTitolo)}</h2>
+        <p class="boutique__statement" data-scrub>${esc(testi.boutiqueTesto)}</p>
         <dl class="points">
           ${testi.boutiquePunti
             .map(
@@ -242,8 +277,8 @@ function boutique(cfg) {
             .join('')}
         </dl>
       </div>
-      <figure class="boutique__media" data-reveal>
-        <div class="bezel"><div class="bezel__core">
+      <figure class="boutique__media">
+        <div class="bezel"><div class="bezel__core" data-img-reveal>
           ${configImg(cfg.immagini.boutique, '(min-width: 1024px) 40vw, 92vw')}
         </div></div>
       </figure>
@@ -256,13 +291,13 @@ function services(cfg) {
   return `
   <section class="section services" id="servizi" aria-labelledby="servizi-title">
     <div class="container">
-      <h2 class="display h2" id="servizi-title" data-reveal>${esc(cfg.testi.serviziTitolo)}</h2>
+      <h2 class="display h2" id="servizi-title" data-split>${esc(cfg.testi.serviziTitolo)}</h2>
       <ul class="bento">
         ${list
           .map(
             (s, i) => `
           <li class="bento__cell bento__cell--${i + 1}" data-reveal style="--i:${i}">
-            ${i === 0 ? `<div class="bento__bg">${configImg(cfg.immagini.servizi, '(min-width: 1024px) 50vw, 92vw')}</div>` : ''}
+            ${i === 0 ? `<div class="bento__bg" data-parallax>${configImg(cfg.immagini.servizi, '(min-width: 1024px) 50vw, 92vw')}</div>` : ''}
             <div class="bento__body">
               <span class="bento__icon">${icon(serviceIcons[s.id] || 'car')}</span>
               <h3 class="bento__title">${esc(s.titolo)}</h3>
@@ -292,9 +327,9 @@ function tradeIn(cfg) {
   return `
   <section class="section trade" id="permuta" aria-labelledby="permuta-title">
     <div class="container trade__grid">
-      <div class="trade__intro" data-reveal>
-        <h2 class="display h2" id="permuta-title">${esc(cfg.testi.permutaTitolo)}</h2>
-        <p class="lead">${esc(cfg.testi.permutaTesto)}</p>
+      <div class="trade__intro">
+        <h2 class="display h2" id="permuta-title" data-split>${esc(cfg.testi.permutaTitolo)}</h2>
+        <p class="lead" data-lines>${esc(cfg.testi.permutaTesto)}</p>
       </div>
       <div class="bezel trade__form-wrap" data-reveal>
         <form class="bezel__core trade__form" novalidate data-trade-form>
@@ -324,17 +359,17 @@ function contacts(cfg) {
   return `
   <section class="section contacts" id="contatti" aria-labelledby="contatti-title">
     <div class="container contacts__grid">
-      <div class="contacts__info" data-reveal>
-        <h2 class="display h2" id="contatti-title">${esc(testi.contattiTitolo)}</h2>
-        <ul class="info">
+      <div class="contacts__info">
+        <h2 class="display h2" id="contatti-title" data-split>${esc(testi.contattiTitolo)}</h2>
+        <ul class="info" data-stagger>
           <li>${icon('mapPin')}<div><p class="info__label">Indirizzo</p><p>${value(contatti.indirizzo)}</p><p class="muted">${esc(contatti.citta)}</p></div></li>
           <li>${icon('clock')}<div><p class="info__label">Orari</p><p>${esc(contatti.orari)}</p></div></li>
           <li>${icon('whatsapp')}<div><p class="info__label">WhatsApp</p><p><a href="${waLink(cfg, `Buongiorno, vorrei fissare un appuntamento in showroom.`)}" target="_blank" rel="noopener">${esc(contatti.whatsappVisibile)}</a></p></div></li>
           <li>${icon('instagram')}<div><p class="info__label">Instagram</p><p><a href="${esc(contatti.instagramUrl)}" target="_blank" rel="noopener">@${esc(contatti.instagram)}</a></p></div></li>
         </ul>
       </div>
-      <div class="bezel contacts__map" data-reveal>
-        <div class="bezel__core">
+      <div class="bezel contacts__map">
+        <div class="bezel__core" data-img-reveal>
           <iframe title="Mappa: ${esc(contatti.citta)}" src="${mapSrc}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
@@ -343,7 +378,17 @@ function contacts(cfg) {
 }
 
 export function home(cfg) {
-  return hero(cfg) + collection(cfg) + soldSection(cfg) + boutique(cfg) + services(cfg) + tradeIn(cfg) + contacts(cfg);
+  return (
+    hero(cfg) +
+    marquee(cfg) +
+    collection(cfg) +
+    soldSection(cfg) +
+    boutique(cfg) +
+    services(cfg) +
+    manifesto(cfg) +
+    tradeIn(cfg) +
+    contacts(cfg)
+  );
 }
 
 /* ---------- Dettaglio auto ---------- */
@@ -399,12 +444,12 @@ export function detail(cfg, car) {
     <div class="container detail__body">
       <header class="detail__head">
         <p class="status ${isSold ? 'status--sold' : ''}">${esc(car.stato)}</p>
-        <h1 class="display detail__title" id="car-title" tabindex="-1">${esc(car.nome)}</h1>
+        <h1 class="display detail__title" id="car-title" tabindex="-1" data-split>${esc(car.nome)}</h1>
         ${car.note ? `<p class="detail__note">${esc(car.note)}</p>` : ''}
       </header>
 
       <div class="detail__side">
-        <dl class="specs">
+        <dl class="specs" data-stagger>
           ${specs.map(([k, v]) => `<div class="spec"><dt>${k}</dt><dd>${value(v)}</dd></div>`).join('')}
         </dl>
         <div class="price">

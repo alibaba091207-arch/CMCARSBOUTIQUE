@@ -44,10 +44,8 @@ for (const slug of await readdir(autoDir)) {
   }
 }
 
-// Showroom: versione "cinematic" più scura e contrastata per l'hero.
+// Showroom: foto originale, senza ritocchi di colore.
 const showroom = path.join(ROOT, 'showroom', 'showroom-panoramica.jpg');
-await toWebp(showroom, path.join(OUT, 'showroom'), 'showroom-hero', HERO_WIDTHS, (s) =>
-  s.modulate({ brightness: 0.72, saturation: 1.08 }).linear(1.22, -24)
-);
+await toWebp(showroom, path.join(OUT, 'showroom'), 'showroom-panoramica', HERO_WIDTHS);
 
 console.log('Immagini pronte.');

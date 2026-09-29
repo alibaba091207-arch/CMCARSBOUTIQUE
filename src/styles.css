@@ -283,8 +283,9 @@ button,
     color 240ms ease;
 }
 
+/* "scale" separato da "transform": GSAP muove i pulsanti magnetici con transform senza annullare la pressione. */
 .btn:active {
-  transform: scale(0.97);
+  scale: 0.97;
 }
 
 .btn .icon {
@@ -424,7 +425,7 @@ button,
   padding: 6px 7px 6px 16px;
   border: 1px solid var(--gold-line);
   border-radius: 999px;
-  background: rgb(10 10 11 / 0.62);
+  background: rgb(10 10 11 / 0.74);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   backdrop-filter: blur(18px) saturate(140%);
   box-shadow: 0 10px 40px -12px rgb(0 0 0 / 0.6);
@@ -623,8 +624,8 @@ button,
   position: absolute;
   inset: 0 0 -2px;
   background:
-    linear-gradient(180deg, rgb(10 10 11 / 0.7) 0%, rgb(10 10 11 / 0.1) 20%, rgb(10 10 11 / 0) 40%, rgb(10 10 11 / 0.6) 66%, var(--bg) 92%),
-    radial-gradient(120% 80% at 50% 45%, transparent 55%, rgb(10 10 11 / 0.5) 100%);
+    /* Foto originale: solo un velo in alto per la barra e la sfumatura in basso per il testo. */
+    linear-gradient(180deg, rgb(10 10 11 / 0.45) 0%, rgb(10 10 11 / 0) 16%, rgb(10 10 11 / 0) 52%, rgb(10 10 11 / 0.55) 74%, var(--bg) 96%);
 }
 
 .hero__content {
@@ -702,8 +703,7 @@ button,
 
   .hero__media::after {
     background:
-      linear-gradient(180deg, rgb(10 10 11 / 0.35) 0%, transparent 30%, transparent 70%, rgb(10 10 11 / 0.45) 100%),
-      radial-gradient(120% 80% at 50% 45%, transparent 55%, rgb(10 10 11 / 0.45) 100%);
+      linear-gradient(180deg, rgb(10 10 11 / 0.2) 0%, transparent 18%);
   }
 
   .hero__content {
@@ -1412,8 +1412,7 @@ button,
 }
 
 .fab:active {
-  transform: scale(0.93);
-  transition-duration: 140ms;
+  scale: 0.93;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1615,7 +1614,6 @@ button,
   z-index: 25;
   padding: 28px var(--gutter) calc(14px + var(--safe-b));
   background: linear-gradient(180deg, transparent, rgb(10 10 11 / 0.92) 38%, var(--bg));
-  animation: bar-in 800ms var(--ease-out) 500ms both;
 }
 
 @keyframes bar-in {
@@ -1731,67 +1729,169 @@ body[data-page='detail'] .footer {
   margin-top: 32px;
 }
 
+/* ---------- Manifesto: frase grande che si accende scorrendo ---------- */
+
+.manifesto__text {
+  font-size: clamp(3rem, 10.5vw, 9rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.manifesto__line {
+  display: block;
+}
+
+.manifesto__line--gold {
+  margin-top: 0.12em;
+  font-style: italic;
+  font-size: 0.5em;
+  color: var(--gold);
+}
+
+.manifesto__pill {
+  display: inline-block;
+  width: 1.7em;
+  height: 0.78em;
+  margin-inline: 0.18em 0;
+  overflow: hidden;
+  border-radius: 999px;
+  vertical-align: 0.02em;
+}
+
+.manifesto__pill img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+}
+
+@media (min-width: 1024px) {
+  .manifesto__line:nth-child(2) {
+    padding-left: 1.4em;
+  }
+}
+
+/* ---------- Firma del footer ---------- */
+
+.footer__word {
+  margin-bottom: 40px;
+  font-size: clamp(3.2rem, 17vw, 17rem);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
 /* =========================================================
-   Movimento. Un solo gesto d'autore: l'ingresso dell'hero.
-   Il resto accompagna, lento e sottile.
+   Movimento: le animazioni vivono in src/motion.js (GSAP).
+   Qui solo ciò che serve al CSS: barra di avanzamento, nastro
+   delle marche, riflesso sui pulsanti e maschere del testo.
    ========================================================= */
 
-@media (prefers-reduced-motion: no-preference) {
-  /* Titolo: ogni riga sale da dietro una maschera. */
-  .hero__title .line > span {
-    animation: line-rise 1300ms var(--ease-out) both;
-    animation-delay: calc(250ms + var(--i) * 120ms);
-  }
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 70;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
 
-  .hero__lead,
-  .hero__ctas {
-    animation: soft-rise 1100ms var(--ease-out) both;
-  }
+/* Maschere di SplitText: i caratteri salgono da sotto il bordo della parola. */
+.char {
+  display: inline-block;
+  will-change: transform;
+}
 
-  .hero__lead {
-    animation-delay: 720ms;
-  }
+.hero__title .char {
+  transform-origin: 0 100%;
+}
 
-  .hero__ctas {
-    animation-delay: 860ms;
-  }
+/* Nastro delle marche: movimento continuo e lento, lineare per definizione. */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(28px, 5vw, 48px);
+  border-block: 1px solid var(--line);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
 
-  .hero__media img {
-    animation: hero-settle 2400ms var(--ease-out) both;
-  }
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
 
-  /* Parallax leggero, guidato dallo scroll (CSS, fuori dal thread principale). */
-  @supports (animation-timeline: scroll()) {
-    .hero__media {
-      animation: hero-parallax linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100svh;
-    }
-  }
+.marquee__group {
+  display: flex;
+  align-items: center;
+}
 
-  [data-reveal] {
-    opacity: 0;
-    transform: translateY(32px);
-    transition:
-      opacity 1000ms var(--ease-out),
-      transform 1300ms var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 90ms);
-  }
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+  padding-right: clamp(28px, 5vw, 64px);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+}
 
-  [data-reveal].is-in {
-    opacity: 1;
-    transform: none;
+.marquee__item::after {
+  content: '';
+  width: clamp(24px, 4vw, 56px);
+  height: 1px;
+  background: var(--gold);
+}
+
+.marquee__item:nth-child(even) {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(239 234 225 / 0.55);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+}
+
+/* Riflesso che attraversa il pulsante oro al passaggio del mouse. */
+.btn--gold {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn--gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 900ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--gold:hover::before {
+    transform: translateX(120%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 0;
-    transition: opacity 500ms ease;
-  }
-
-  [data-reveal].is-in {
-    opacity: 1;
+  .marquee__track {
+    animation: none;
   }
 
   .menu li,
@@ -1801,67 +1901,6 @@ body[data-page='detail'] .footer {
 
   .fab.is-away {
     transform: none;
-  }
-
-  .detail-bar {
-    animation: fade-only 400ms ease both;
-  }
-}
-
-@keyframes line-rise {
-  from {
-    transform: translateY(108%);
-  }
-}
-
-@keyframes soft-rise {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-}
-
-@keyframes hero-settle {
-  from {
-    opacity: 0;
-    transform: scale(1.08);
-  }
-}
-
-@keyframes hero-parallax {
-  to {
-    transform: translateY(14%);
-  }
-}
-
-@keyframes fade-only {
-  from {
-    opacity: 0;
-  }
-}
-
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: scroll()) {
-    .hero__media {
-      animation: none;
-    }
-
-    .hero__media img {
-      animation:
-        hero-settle 2400ms var(--ease-out) both,
-        hero-parallax-in linear both;
-      animation-timeline: auto, scroll(root);
-      animation-range: normal, 0 100svh;
-    }
-  }
-}
-
-@keyframes hero-parallax-in {
-  from {
-    transform: scale(1.1) translateY(-3%);
-  }
-  to {
-    transform: scale(1.1) translateY(4%);
   }
 }
 
